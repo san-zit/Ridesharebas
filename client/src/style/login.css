@@ -1,0 +1,110 @@
+.container {
+  height: 100dvh;
+  display: flex;
+  background: linear-gradient(to right, #000000, #ffffff);
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* LEFT IMAGE SECTION */
+.container-left {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* RIGHT FORM SECTION */
+.card {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* FORM BOX */
+.card-child {
+  width: 100%;
+  max-width: 380px;
+  padding: 20px;
+  border-radius: 16px;
+  background: #d3d3d3;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  box-sizing: border-box;
+}
+
+/* TITLE */
+h1 {
+  font-family: sans-serif;
+  color: #212121;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  padding: 12px 16px;
+
+  font-size: 16px;
+  font-family: sans-serif;
+
+  border-radius: 8px;
+  border: 1px solid #d3d3d3;
+  outline: none;
+
+  background: #f8f9fa;
+  box-sizing: border-box;
+}
+
+/* BUTTON (FIXED FOR NO FLICKER) */
+.btn {
+  width: 100%;
+  max-width: 320px;
+  align-self: center;
+
+  padding: 12px 16px;
+  border-radius: 32px;
+  border: none;
+
+  background: linear-gradient(to right, #000000, #ffffff);
+  color: white;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  cursor: pointer;
+  user-select: none;
+
+  box-sizing: border-box;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+  cursor: pointer;
+}
+
+/* TEXT */
+p {
+  text-align: center;
+  font-size: 18px;
+}
+
+/* LINK */
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+a:hover {
+  text-decoration: underline;
+}

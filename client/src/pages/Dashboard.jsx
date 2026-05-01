@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.svg"
+import image from "../assets/theme.png"
 
 export default function Dashboard() {
     const navigate = useNavigate();

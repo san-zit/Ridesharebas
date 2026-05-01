@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import image from "../assets/theme.png";
 import api from "../utils/api";
+import "../style/login.css";
 
 export default function Login() {
   const [form, setForm] = useState({});
@@ -13,56 +15,37 @@ export default function Login() {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h1>🚗 Driver Logbook</h1>
+    <div className="container">
+      {/* LEFT FORM */}
+      <div className="card">
+        {/* <div className="logo"></div> */}todo///
+        <div className="card-child">
+          <h1>Sign in</h1>
 
-        <input
-          placeholder="Email"
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-        <input
-          placeholder="Password"
-          type="password"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
+          <input
+            placeholder="Email"
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
 
-        <button onClick={handleLogin} style={styles.btn}>
-          Login
-        </button>
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+          />
 
-        <p>
-          New user? <Link to="/register">Register now</Link>
-        </p>
+          <button className="btn" onClick={handleLogin}>
+            Login
+          </button>
+
+          <p>
+            New user? <Link to="/register">Register now</Link>
+          </p>
+        </div>
+      </div>
+      {/* RIGHT SIDE IMAGE */}
+      <div className="container-left">
+        <img src={image} alt="theme" />
       </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: "#0f172a",
-    color: "white",
-  },
-  card: {
-    background: "#1e293b",
-    padding: 30,
-    borderRadius: 12,
-    display: "flex",
-    flexDirection: "column",
-    gap: 10,
-    width: 300,
-  },
-  btn: {
-    background: "#3b82f6",
-    color: "white",
-    padding: 10,
-    border: "none",
-    borderRadius: 6,
-    cursor: "pointer",
-  },
-};
