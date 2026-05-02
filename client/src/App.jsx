@@ -5,10 +5,13 @@ import Dashboard from "./pages/Dashboard";
 import Trips from "./pages/Trips";
 import Expenses from "./pages/Expenses";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         {/* Public */}
         <Route path="/" element={<Login />} />

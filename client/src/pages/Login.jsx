@@ -3,22 +3,34 @@ import { useNavigate, Link } from "react-router-dom";
 import image from "../assets/theme.png";
 import api from "../utils/api";
 import "../style/login.css";
+import { validateLogin } from "../utils/validateLogin";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Login() {
   const [form, setForm] = useState({});
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const res = await api.post("/auth/login", form);
-    localStorage.setItem("token", res.data.token);
-    navigate("/dashboard");
+    try {
+      const error = validateLogin(form);
+
+      if (Object.keys(error).length > 0) {
+        toast.error(Object.values(error)[0]);
+        return;
+      }
+      const res = await api.post("/auth/login", form);
+      localStorage.setItem("token", res.data.token);
+      navigate("/dashboard");
+    } catch (err) {
+      toast.error("Login Failed!");
+    }
   };
 
   return (
     <div className="container">
       {/* LEFT FORM */}
       <div className="card">
-        {/* <div className="logo"></div> */}todo///
+        {/* <div className="logo"></div> */}
         <div className="card-child">
           <h1>Sign in</h1>
 
@@ -42,6 +54,7 @@ export default function Login() {
           </p>
         </div>
       </div>
+
       {/* RIGHT SIDE IMAGE */}
       <div className="container-left">
         <img src={image} alt="theme" />
