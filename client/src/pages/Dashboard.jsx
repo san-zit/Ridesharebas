@@ -19,8 +19,10 @@ import { useState } from "react";
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const uname = localStorage.getItem("uname");
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("uname");
     navigate("/");
   };
   const [open, setOpen] = useState(true);
@@ -29,7 +31,7 @@ export default function Dashboard() {
       <div className="sidebar">
         <ul>
           <li className="menu-icon">
-            <Menu size={35}/>
+            <Menu size={35} />
           </li>
           <li>
             <button className="btn-dashboard">
@@ -65,14 +67,17 @@ export default function Dashboard() {
       </div>
       <div className="nav-dash">
         <div className="navbar">
-          <h1>Dashboard</h1>
-          <DateTime />
-          <button className="btn-dashboard">
+          <h1>
+            <span className="dashboard-uname">{uname}</span>
+          </h1>
+          <div className="dateitime">
+          <DateTime /></div>
+          <button onClick={logout} className="btn-dashboard">
             <LogOut color="white" size={20} />
             Logout
           </button>
         </div>
-        <div className="dashboard-hero">this is dash display</div>
+        <div className="dashboard-hero"><h1>dashboard</h1></div>
       </div>
     </div>
   );
@@ -84,5 +89,3 @@ export default function Dashboard() {
 //         <Link to="/expenses" style={styles.card}>
 //           💰 Expenses
 //         </Link>
-
-//  <button onClick={logout}>Logout</button>;
