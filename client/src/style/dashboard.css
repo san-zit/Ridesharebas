@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* LEFT SIDEBAR */
+.sidebar {
+  width: 120px;
+  background: black;
+  color: white;
+
+  
+}
+
+.sidebar ul {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 20px;
+ 
+  padding: 0;
+  margin: 0;
+  margin-top: 4px;
+  list-style: none;
+  /* align-items: center; */
+
+}
+li{
+  transition: 0.2s;
+  padding: 8px;
+  
+}
+li:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  
+  
+  color: black;
+
+}
+.menu-icon{
+  
+  margin-left: 8px;
+  
+}
+.menu-icon:hover{
+   /* background: white; */
+  color: white;
+  
+  transform: none;
+}
+
+
+
+/* RIGHT SECTION */
+.nav-dash {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP NAVBAR */
+.navbar {
+  height: 40px;
+  
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+}
+h1{
+  margin-left: 20px;
+}
+.btn-dashboard {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
+  border-radius: 8px;
+  padding: 4px;
+  border: none;
+  gap: 4px;
+  cursor: pointer;
+  background: black;
+  color: white;
+}
+
+/* MAIN DASHBOARD AREA */
+.dashboard-hero {
+  flex: 1;
+  background: blue;
+}
+
