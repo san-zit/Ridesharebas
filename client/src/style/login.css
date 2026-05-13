@@ -1,4 +1,3 @@
-
 .container {
   height: 100dvh;
   display: flex;
@@ -8,16 +7,18 @@
 }
 
 /* LEFT IMAGE SECTION */
-.container-left {
+.container-right {
   width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* overflow: hidden; */
 }
 
-.container-left img {
+
+.container-right img {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   object-fit: cover;
 }
 
@@ -27,8 +28,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
-.container-left,
+.container-right,
 .card {
   flex: 1;
 }

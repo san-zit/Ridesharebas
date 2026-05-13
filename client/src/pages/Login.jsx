@@ -5,6 +5,7 @@ import api from "../utils/api";
 import "../style/login.css";
 import { validateLogin } from "../utils/validateLogin";
 import { ToastContainer, toast } from "react-toastify";
+import logo from "../assets/logo-main.png";
 
 export default function Login() {
   const [form, setForm] = useState({});
@@ -29,9 +30,11 @@ export default function Login() {
 
   return (
     <div className="container">
+      {/* <div>
+        <img src={logo} className="logo" alt="logo" />
+      </div> */}
       {/* LEFT FORM */}
       <div className="card">
-        {/* <div className="logo"></div> */}
         <div className="card-child">
           <h1>Sign in</h1>
 
@@ -57,7 +60,7 @@ export default function Login() {
       </div>
 
       {/* RIGHT SIDE IMAGE */}
-      <div className="container-left">
+      <div className="container-right">
         <img src={image} alt="theme" />
       </div>
     </div>
