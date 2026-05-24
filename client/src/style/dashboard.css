@@ -164,9 +164,21 @@ li:hover {
    MAIN CONTENT
 ======================= */
 .dashboard-hero {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   margin-top: 50px;
   margin-left: 118px;
+  margin-right: 4px;
+  /* background: #c1babc; */
+  padding-top: 4px;
+  padding-left: 8px;
+  /* align-items: center; */
+  /* justify-content: center; */
+  
+}
+.footer{
+
 }
 
 /* =======================

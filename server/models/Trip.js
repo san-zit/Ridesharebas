@@ -6,10 +6,10 @@ const TripSchema = new mongoose.Schema({
     ref: "User",
   },
   date: String,
-  startKm: Number,
-  endKm: Number,
-  from: String,
-  to: String,
+  startkm: Number,
+  endkm: Number,
+  distance: String,
+  purpose: String,
 });
 
 module.exports = mongoose.model("Trip", TripSchema);

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "../style/dashboard.css";
 import DateTime from "../utils/DateTime.jsx";
 import logo from "../assets/logo-main.png";
+import DashboardTrips from "../components/DashboardTrips";
 import {
   Settings,
   Menu,
@@ -36,13 +37,14 @@ export default function Dashboard() {
 
       <div className={`sidebar ${open ? "open" : ""}`}>
         <div className="logo-main">
-        
-            <img src={logo} className="logo" alt="logo" />
-          
+          <img src={logo} className="logo" alt="logo" />
         </div>
         <ul>
           <li>
-            <button className="btn-dashboard">
+            <button
+              className="btn-dashboard"
+              onClick={() => navigate("/trips")}
+            >
               <CarTaxiFront color="white" size={20} />
               Trips
             </button>
@@ -100,16 +102,15 @@ export default function Dashboard() {
         </div>
 
         <div className="dashboard-hero">
-          <h1>dashboard</h1>
+         <DashboardTrips/>
         </div>
       </div>
+      <div className="footer"></div>
     </div>
   );
 }
 
-//  <Link to="/trips" style={styles.card}>
-//           🚗 Trip Logbook
-//         </Link>
+
 //         <Link to="/expenses" style={styles.card}>
 //           💰 Expenses
 //         </Link>

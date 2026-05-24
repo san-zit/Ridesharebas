@@ -14,6 +14,8 @@ router.get("/", auth, async (req, res) => {
 //Add trip
 
 router.post("/", auth, async (req, res) => {
+  console.log("Body:", req.body); // ← is the data arriving?
+  console.log("User:", req.user);
   const trip = new Trip({
     ...req.body,
     userId: req.user.id,

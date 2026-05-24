@@ -116,7 +116,7 @@ a:hover {
   text-decoration: underline;
 }
 @media (max-width: 768px) {
-  .container-left {
+  .container-right {
     display: none; /* hide image on small screens */
   }
 
