@@ -1,19 +1,19 @@
 const express = require("express");
-const Trip = require("../models/Trip");
+const Earnings = require("../models/Earnings");
 const auth = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
 /*
- * GET ALL TRIPS (only logged-in user)
+ * GET ALL EARNINGS
  */
 router.get("/", auth, async (req, res) => {
   try {
-    const trips = await Trip.find({
+    const earnings = await Earnings.find({
       userId: req.user.id,
-    }).sort({ date: -1 });
+    }).sort({ dateFrom: -1 });
 
-    res.json(trips);
+    res.json(earnings);
   } catch (err) {
     console.error(err);
     res.status(500).json({
@@ -23,22 +23,22 @@ router.get("/", auth, async (req, res) => {
 });
 
 /*
- * GET SINGLE TRIP
+ * GET SINGLE EARNING
  */
 router.get("/:id", auth, async (req, res) => {
   try {
-    const trip = await Trip.findOne({
+    const earning = await Earnings.findOne({
       _id: req.params.id,
       userId: req.user.id,
     });
 
-    if (!trip) {
+    if (!earning) {
       return res.status(404).json({
-        message: "Trip not found",
+        message: "Earning not found",
       });
     }
 
-    res.json(trip);
+    res.json(earning);
   } catch (err) {
     console.error(err);
     res.status(500).json({
@@ -48,30 +48,30 @@ router.get("/:id", auth, async (req, res) => {
 });
 
 /*
- * CREATE TRIP (SAFE - whitelist fields)
+ * ADD EARNING
  */
 router.post("/", auth, async (req, res) => {
   try {
-    const { date, startkm, endkm, purpose } = req.body;
+    const { dateFrom, dateTo, earningsType, amount, comments } = req.body;
 
-    // validation
-    if (!date || startkm == null || endkm == null) {
+    if (!dateFrom || !dateTo || !earningsType || !amount) {
       return res.status(400).json({
-        message: "Date, startkm and endkm are required",
+        message: "Date range, earning type and amount are required",
       });
     }
 
-    const trip = new Trip({
-      date,
-      startkm,
-      endkm,
-      purpose,
-      userId: req.user.id, // ALWAYS from auth, never frontend
+    const earning = new Earnings({
+      dateFrom,
+      dateTo,
+      earningsType,
+      amount,
+      comments,
+      userId: req.user.id,
     });
 
-    await trip.save();
+    await earning.save();
 
-    res.status(201).json(trip);
+    res.status(201).json(earning);
   } catch (err) {
     console.error(err);
     res.status(500).json({
@@ -81,37 +81,29 @@ router.post("/", auth, async (req, res) => {
 });
 
 /*
- * UPDATE TRIP (SAFE)
+ * UPDATE EARNING
  */
 router.put("/:id", auth, async (req, res) => {
   try {
-    // whitelist update fields
-    const { date, startkm, endkm, purpose } = req.body;
-
-    const updatedTrip = await Trip.findOneAndUpdate(
+    const earning = await Earnings.findOneAndUpdate(
       {
         _id: req.params.id,
         userId: req.user.id,
       },
-      {
-        date,
-        startkm,
-        endkm,
-        purpose,
-      },
+      req.body,
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
 
-    if (!updatedTrip) {
+    if (!earning) {
       return res.status(404).json({
-        message: "Trip not found",
+        message: "Earning not found",
       });
     }
 
-    res.json(updatedTrip);
+    res.json(earning);
   } catch (err) {
     console.error(err);
     res.status(500).json({
@@ -121,23 +113,23 @@ router.put("/:id", auth, async (req, res) => {
 });
 
 /*
- * DELETE TRIP (SAFE)
+ * DELETE EARNING
  */
 router.delete("/:id", auth, async (req, res) => {
   try {
-    const trip = await Trip.findOneAndDelete({
+    const earning = await Earnings.findOneAndDelete({
       _id: req.params.id,
       userId: req.user.id,
     });
 
-    if (!trip) {
+    if (!earning) {
       return res.status(404).json({
-        message: "Trip not found",
+        message: "Earning not found",
       });
     }
 
     res.json({
-      message: "Trip deleted successfully",
+      message: "Earning deleted successfully",
     });
   } catch (err) {
     console.error(err);

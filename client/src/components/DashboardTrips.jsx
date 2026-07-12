@@ -5,9 +5,12 @@ import { Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 function DashboardTrips() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className="trip-component">
+      <div className="table-section-header">
+        <h3 className="section-heading">Trips Table</h3>
+      </div>
       <div className="add-button">
         <button className="btn-trips" onClick={() => navigate("/trips")}>
           <Plus size={20} color={"black"} />
@@ -15,8 +18,7 @@ function DashboardTrips() {
         </button>
       </div>
       <div className="trips-table">
-<TableTrips/>
-
+        <TableTrips />
       </div>
     </div>
   );

@@ -1,46 +1,63 @@
 import { ToastContainer, toast } from "react-toastify";
+import { validateTrip } from "../utils/validateTrip";
 import api from "../utils/api";
 import "../style/trips.css";
 import { useNavigate } from "react-router-dom";
-import {
-  Settings,
-  Menu,
-  LogOut,
-  CarTaxiFront,
-  Calculator,
-  FileChartColumn,
-  Phone,
-  ArrowLeft,
-  Plus,
-} from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { Settings, Eraser, ArrowLeft } from "lucide-react";
 import { useState } from "react";
 
 export default function Trips() {
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const trip = location.state?.trip;
+  const isEdit = location.state?.isEdit;
+
   const [form, setForm] = useState({
-    date: "",
-    startkm: "",
-    endkm: "",
-    purpose: "",
+    date: trip?.date?.split("T")[0] || "",
+    startkm: trip?.startkm || "",
+    endkm: trip?.endkm || "",
+    purpose: trip?.purpose || "",
   });
-
+  const handleReset = () => {
+    setForm({
+      date: "",
+      startkm: "",
+      endkm: "",
+      purpose: "",
+    });
+    toast.success("Form is cleared.");
+    navigate("/trips");
+  };
   const handleAddTrips = async () => {
+    if (!validateTrip(form)) return;
     try {
-      // const userId = localStorage.getItem("userId");
+      if (isEdit) {
+        await api.put(`/trips/${trip._id}`, form);
 
-      await api.post("/trips", form);
-
-      toast.success("Trip Saved!");
-
+        toast.success("Trip Updated!");
+        handleReset();
+        navigate("/dashboard",{ state: { activePage: "trips" } });
+        
+        return;
+      } else {
+        await api.post("/trips", form);
+        toast.success("Trip Added!");
+      }
       setForm({
         date: "",
         startkm: "",
         endkm: "",
         purpose: "",
       });
+      // await api.post("/trips", form);
+
+      // toast.success("Trip Saved!");
     } catch (err) {
-      console.log(err.response.data);
-      toast.error("Failed!");
+      // console.log(err.response.data);
+      toast.error(err.response.data + "Failed!");
     }
   };
 
@@ -49,15 +66,19 @@ export default function Trips() {
       <div className="add-trip-button-section">
         <button
           className="btn-back-to-dashboard"
-          onClick={() => navigate("/dashboard")}
+          onClick={() => navigate("/dashboard",{ state: { activePage: "trips" } })}
         >
           <ArrowLeft size={20} color={"black"} />
           Dashboard
         </button>
+        <button className="btn-reset-form" onClick={handleReset}>
+          <Eraser size={20} color={"black"} />
+          Reset Form
+        </button>
       </div>
       <div className="add-trip-section">
         <div className="card-child">
-          <h1>Add Trip</h1>
+          <h1>{isEdit ? "Update Trip" : "Add Trip"}</h1>
 
           <input
             value={form.date}
@@ -89,7 +110,7 @@ export default function Trips() {
           </select>
 
           <button className="btn" onClick={handleAddTrips}>
-            Submit
+            Save
           </button>
         </div>
       </div>

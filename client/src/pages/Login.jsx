@@ -29,6 +29,11 @@ export default function Login() {
     }
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    handleLogin();
+  };
+
   return (
     <div className="container">
       {/* <div>
@@ -36,7 +41,7 @@ export default function Login() {
       </div> */}
       {/* LEFT FORM */}
       <div className="card">
-        <div className="card-child">
+        <form className="card-child" onSubmit={handleFormSubmit}>
           <h1>Sign in</h1>
 
           <input
@@ -50,14 +55,14 @@ export default function Login() {
             onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
 
-          <button className="btn" onClick={handleLogin}>
+          <button className="btn" type="submit" onClick={handleLogin}>
             Login
           </button>
 
           <p>
             New user? <Link to="/register">Register now</Link>
           </p>
-        </div>
+        </form>
       </div>
 
       {/* RIGHT SIDE IMAGE */}

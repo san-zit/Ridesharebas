@@ -57,7 +57,7 @@ h1 {
 }
 
 /* INPUTS */
-input {
+.text_area_expenses, input {
   width: 100%;
   padding: 12px 16px;
 

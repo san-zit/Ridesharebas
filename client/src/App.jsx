@@ -4,6 +4,8 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Trips from "./pages/Trips";
 import Expenses from "./pages/Expenses";
+import Earnings from "./pages/Earnings";
+import Report from "./pages/Report";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,7 +23,9 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/trips" element={<Trips />} />
+          <Route path="/earnings" element={<Earnings />} />
           <Route path="/expenses" element={<Expenses />} />
+          <Route path="/reports" element={<Report />} />
         </Route>
       </Routes>
     </BrowserRouter>
